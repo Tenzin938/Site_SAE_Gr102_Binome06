@@ -1,0 +1,33 @@
+/* Décalage pour ne pas que le menu cache le titre */
+body {
+    padding-top: 20px;
+    background-color: #f8f9fa; /* Fond gris très clair */
+}
+
+/* Style des cartes du menu */
+.custom-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    border-radius: 15px;
+}
+
+.custom-card:hover {
+    transform: translateY(-5px); /* La carte monte un peu */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+    cursor: pointer;
+    background-color: #ffffff;
+}
+
+/* Icônes */
+.fas {
+    transition: color 0.3s;
+}
+.custom-card:hover .fas {
+    transform: scale(1.1);
+}
+
+/* Titres */
+h1, h2, h3 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Virtualisation - SAÉ S1.03</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-dark bg-dark fixed-top">
+    <div class="container"><a class="navbar-brand" href="index.html">← Retour Accueil</a></div>
+</nav>
+
+<div class="container mt-5 pt-5">
+    <h2 class="mb-4 border-bottom pb-2">Concepts Théoriques et Choix Techniques</h2>
+
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h4>Définition et Distinctions</h4>
+            <p>La virtualisation est une technologie permettant de créer des versions virtuelles de ressources informatiques (serveur, stockage, réseau) sur une machine physique unique. Elle permet d'optimiser l'utilisation du matériel en exécutant plusieurs systèmes d'exploitation simultanément, isolés les uns des autres.</p>
+
+            <p>Il ne faut pas confondre la virtualisation avec d'autres techniques de simulation :</p>
+            <ul>
+                <li><strong>L'Émulateur :</strong> Il reproduit intégralement le comportement d'un matériel (processeur, mémoire) via un logiciel. C'est une méthode précise mais très gourmande en ressources et souvent lente.</li>
+                <li><strong>Le Simulateur :</strong> Il imite le comportement global ou la logique d'un système sans chercher à reproduire fidèlement l'architecture matérielle.</li>
+                <li><strong>L'Outil de Virtualisation (Hyperviseur) :</strong> Contrairement à l'émulateur, il permet au système invité d'accéder directement (ou presque) aux ressources matérielles de l'hôte, offrant des performances proches du natif.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="alert alert-secondary">
+        <h5 class="alert-heading">Classification des solutions</h5>
+        <p>Les solutions se classent en deux catégories d'hyperviseurs :</p>
+        <ul>
+            <li><strong>Type 2 (Hébergés) :</strong> Comme VirtualBox. Ils s'installent comme des applications classiques sur un système d'exploitation hôte. Ils sont idéaux pour le développement et les tests.</li>
+            <li><strong>Type 1 (Bare-metal) :</strong> Comme Stratus ou ESXi. Ils s'installent directement sur le matériel (la couche "fer"), sans OS intermédiaire, pour maximiser les performances.</li>
+        </ul>
+    </div>
+
+    <h3 class="mt-5">Mise en œuvre de l'environnement virtuel</h3>
+    <p>Pour héberger notre serveur web, nous avons procédé à la création d'une nouvelle machine virtuelle.</p>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-header bg-primary text-white">Choix de l'OS</div>
+                <div class="card-body">
+                    <p>Nous avons sélectionné <strong>Ubuntu 24.04 LTS</strong>.</p>
+                    <p><strong>Justification :</strong> Il s'agit d'une version "Long Term Support" (LTS), garantissant une stabilité et des mises à jour de sécurité pendant 5 ans. C'est un standard industriel pour le déploiement de serveurs web Apache.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-header bg-success text-white">Ressources Matérielles</div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>CPU :</strong> 2 cœurs alloués. <br><em>Justification :</em> L'allocation d'un seul cœur provoque souvent des ralentissements. Passer à 2 cœurs assure une fluidité multitâche.</li>
+                        <li><strong>RAM :</strong> 4096 Mo (4 Go). <br><em>Justification :</em> L'environnement de bureau moderne et le serveur web nécessitent davantage de ressources qu'1 Go.</li>
+                        <li><strong>Disque :</strong> 20 Go (Dynamiquement alloué). <br><em>Justification :</em> Cela permet au fichier de ne prendre que la place réelle utilisée sur l'hôte, optimisant le stockage.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4 mb-5">
+        <img src="assets/capture_vm.png" class="img-fluid border" alt="Capture VirtualBox">
+    </div>
+</div>
+</body>
+</html>

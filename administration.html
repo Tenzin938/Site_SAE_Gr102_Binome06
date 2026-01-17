@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Administration - SAÉ S1.03</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-dark bg-dark fixed-top">
+    <div class="container"><a class="navbar-brand" href="index.html">← Retour Accueil</a></div>
+</nav>
+
+<div class="container mt-5 pt-5">
+    <h2 class="mb-4 border-bottom pb-2">Configuration des Comptes et des Droits </h2>
+    <p>Une fois le système installé, nous avons configuré l'environnement multi-utilisateurs en séparant les comptes d'administration des comptes standards .</p>
+
+    <div class="card mb-4">
+        <div class="card-header fw-bold">1.Création du Compte Administrateur </div>
+        <div class="card-body">
+            <p>Nous avons créé un compte spécifique disposant des privilèges élevés (root/sudo).</p>
+            <ul>
+                <li><strong>Nom :</strong> admin_Gr102_Binome06 </li>
+                <li><strong>Commande :</strong> <code>sudo adduser --allow-bad-names admin_Gr102_Binome06</code> </li>
+            </ul>
+            <div class="alert alert-info">
+                <strong>Explication technique :</strong> L'option <code>--allow-bad-names</code> a été nécessaire car Linux n'autorise pas par défaut les majuscules et les underscores dans les noms d'utilisateurs standards.
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header fw-bold">2. Création du Groupe et Utilisateurs Standards </div>
+        <div class="card-body">
+            <p>Pour faciliter la gestion des permissions, nous avons créé un groupe dédié nommé <strong>Binome06</strong> .</p>
+            <div class="terminal">
+                sudo groupadd Binome06 <br>
+                sudo adduser --allow-bad-names Binome06_1 <br>
+                sudo usermod -aG Binome06 Binome06_1
+            </div>
+            <p><em>Explication :</em> La commande <code>usermod -aG</code> permet d'ajouter l'utilisateur à un groupe sans le retirer de ses groupes actuels.</p>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header fw-bold">3. Vérification de la Configuration </div>
+        <div class="card-body">
+            <p>Pour valider que notre structure est opérationnelle, nous avons utilisé la commande <code>groups</code> :</p>
+            <ul>
+                <li><strong>Administrateur :</strong> Appartient aux groupes <code>sudo</code> et <code>Binome06</code> .</li>
+                <li><strong>Utilisateurs :</strong> Appartiennent uniquement au groupe <code>Binome06</code>, garantissant qu'ils n'ont pas accès aux commandes critiques .</li>
+            </ul>
+            <img src="assets/capture_users.png" class="img-fluid border" alt="Capture Terminal Groups">
+        </div>
+    </div>
+
+    <h3 class="mt-5">Personnalisation de l'Environnement (Prompt) </h3>
+    <p>Afin de distinguer facilement quel utilisateur est connecté, nous avons personnalisé l'invite de commande.</p>
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <p>Nous avons édité le fichier <code>.bashrc</code> (<code>nano ~/.bashrc</code>)Nous avons modifié la variable <strong>PS1</strong> pour inclure des couleurs et afficher le chemin courant. Cela améliore la lisibilité et réduit le risque d'erreurs.</p>
+            <div class="terminal">PS1='\[\033[01;32m\]admin_Gr102_Binome06@PosteDev...' </div>
+        </div>
+    </div>
+    <div class="text-center mt-3 mb-5">
+        <img src="assets/capture_prompt.png" class="img-fluid border" alt="Capture Prompt">
+    </div>
+
+</div>
+</body>
+</html>

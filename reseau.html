@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Réseau & Web - SAÉ S1.03</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-dark bg-dark fixed-top">
+    <div class="container"><a class="navbar-brand" href="index.html">← Retour Accueil</a></div>
+</nav>
+
+<div class="container mt-5 pt-5">
+    <h2 class="mb-4 border-bottom pb-2">Configuration Réseau et Accès à Distance </h2>
+
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header bg-primary text-white">1. Passage en mode "Accès par Pont" </div>
+        <div class="card-body">
+            <p>Nous avons modifié la configuration réseau de la VM pour utiliser le mode <strong>Bridged Adapter</strong>.</p>
+            <p><strong>Justification technique :</strong> En mode NAT, la VM est isolée. Le mode Pont connecte la carte réseau virtuelle directement au réseau physique local . Cela permet à la VM d'obtenir sa propre adresse IP (distincte de l'hôte), la rendant accessible comme un serveur indépendant.</p>
+            <p><em>Adresse IP obtenue :</em> <code>192.168.1.16</code> </p>
+        </div>
+    </div>
+
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header bg-secondary text-white">2. Configuration SSH et Transfert SCP </div>
+        <div class="card-body">
+            <p>Nous avons installé OpenSSH (<code>sudo apt install openssh-server</code>) et configuré le fichier <code>/etc/ssh/sshd_config</code> pour autoriser la connexion .</p>
+
+            <h5 class="mt-4">Transfert des fichiers avec SCP </h5>
+            <p>Pour transférer notre dossier "Site Web" du Mac vers la VM, nous avons utilisé la commande <code>scp</code> :</p>
+            <div class="terminal">
+                scp -O -r "/Users/wzngs/Documents/projetweb" admin_Gr102_Binome06@192.168.1.16:/tmp
+            </div>
+            <ul>
+                <li><strong>-r :</strong> Transfert récursif (dossier entier).</li>
+                <li><strong>path local :</strong> Chemin du dossier sur le Mac.</li>
+                <li><strong>user@ip :</strong> Destination sur la VM.</li>
+            </ul>
+        </div>
+    </div>
+
+    <h3 class="mt-5">Serveur Web Apache </h3>
+    <div class="card mb-5 border-danger shadow-sm">
+        <div class="card-body">
+            <p>Nous avons installé le serveur web avec <code>sudo apt install apache2</code>.</p>
+            <p>Ensuite, nous avons configuré les droits pour que notre groupe puisse modifier le site :</p>
+            <div class="terminal">
+                sudo chown -R www-data:Binome06 /var/www/html <br>
+                sudo chmod -R 775 /var/www/html <br>
+                sudo systemctl reload apache2
+            </div>
+            [cite_start]<p class="mt-3"><strong>Vérification :</strong> Nous ouvrons le navigateur pour vérifier que le site est bien en ligne.</p>
+            <div class="text-center">
+                <img src="assets/capture_site_web.png" class="img-fluid border" alt="Site Web fonctionnel">
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
